@@ -2087,14 +2087,14 @@ void speakLap(int camid, float sec, int num) {
         sout += (speechLangJpn == true) ? "ラップ" : "lap";
         sout += " " + ofToString(num - (useStartGate == true ? 1 : 0)) + ", ";
     }
-    if (speechLangJpn == true) {
-        sout += ssec.substr(0, ssec.length() - 3) + "秒";
-        sout += ssec.substr(ssec.length() - 2, 1) + " ";
-        sout += ssec.substr(ssec.length() - 1, 1);
-    }
-    else {
-        sout += ssec + " seconds";
-    }
+//    if (speechLangJpn == true) {
+//        sout += ssec.substr(0, ssec.length() - 3) + "秒";
+//        sout += ssec.substr(ssec.length() - 2, 1) + " ";
+//        sout += ssec.substr(ssec.length() - 1, 1);
+//    }
+//    else {
+//        sout += ssec + " seconds";
+//    }
     speakAny(speechLangJpn ? "jp" : "en", sout);
 }
 
@@ -2128,6 +2128,8 @@ void speakRemainTime(int sec) {
         } else {
             str = "specified time has passed.";
         }
+        toggleRace();
+        return;
     } else {
         if (jp == true) {
             str += "残り";
@@ -2247,11 +2249,11 @@ void stopRace(bool appexit) {
         raceStarted = false;
         countSound.stop();
         finishSound.play();
-        if (speechLangJpn == true) {
-            speakAny("jp", "レース終了");
-        } else {
-            speakAny("en", "race finished.");
-        }
+//        if (speechLangJpn == true) {
+//            speakAny("jp", "レース終了");
+//        } else {
+//            speakAny("en", "race finished.");
+//        }
         raceResultTimer = ARAP_RSLT_DELAY;
     }
     fwriteRaceResult();
