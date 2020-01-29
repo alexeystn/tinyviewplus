@@ -338,7 +338,7 @@ void ofApp::update() {
             float relp = elapsedTime - WATCH_COUNT_SEC;
             // speak remaining time
             if (nextSpeechRemainSecs >= 0 && raceDuraSecs - relp <= nextSpeechRemainSecs) {
-                notifySound.play();
+                //notifySound.play();
                 speakRemainTime(nextSpeechRemainSecs);
                 setNextSpeechRemainSecs(nextSpeechRemainSecs);
             }
@@ -2162,7 +2162,7 @@ void speakRemainTime(int sec) {
             str += " to go";
         }
     }
-    speakAny(jp == true ? "jp" : "en", str);
+    // speakAny(jp == true ? "jp" : "en", str);
 }
 
 //--------------------------------------------------------------
