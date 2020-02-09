@@ -275,16 +275,16 @@ void setupMain() {
     }
     initRaceVars();
     // speech
-    if (speechLangJpn == true) {
-#ifdef TARGET_OSX
-        speakAny("jp", "タイニービュープラスへ、ようこそ。");
-#endif /* TARGET_OSX */
-#ifdef TARGET_WIN32
-        speakAny("jp", "タイニービュープラスへようこそ。");
-#endif /* TARGET_WIN32 */
-    } else {
-        speakAny("en", "Welcome to Tiny View Plus.");
-    }
+//    if (speechLangJpn == true) {
+//#ifdef TARGET_OSX
+//        speakAny("jp", "タイニービュープラスへ、ようこそ。");
+//#endif /* TARGET_OSX */
+//#ifdef TARGET_WIN32
+//        speakAny("jp", "タイニービュープラスへようこそ。");
+//#endif /* TARGET_WIN32 */
+//    } else {
+//        speakAny("en", "Welcome to Tiny View Plus.");
+//    }
     // debug
     if (DEBUG_ENABLED == true) {
         generateDummyData();
