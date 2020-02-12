@@ -17,8 +17,8 @@ bool sysStatEnabled;
 ofVideoGrabber grabber[CAMERA_MAXNUM];
 ofColor myColorYellow, myColorWhite, myColorLGray, myColorDGray, myColorAlert;
 ofColor myColorBGDark, myColorBGLight;
-ofxTrueTypeFontUC myFontNumber, myFontLabel, myFontLap, myFontLapHist;
-ofxTrueTypeFontUC myFontNumberSub, myFontLabelSub, myFontLapSub;
+ofxTrueTypeFontUC myFontNumber, myFontLabel, myFontPosition, myFontLap, myFontLapHist;
+ofxTrueTypeFontUC myFontNumberSub, myFontLabelSub, myFontPositionSub, myFontLapSub;
 ofxTrueTypeFontUC myFontInfo1m, myFontInfo1p, myFontInfo2m;
 ofImage wallImage, logoLargeImage, logoSmallImage;
 ofImage bttnFscrImage, bttnQuitImage, bttnSettImage, bttnWndwImage;
@@ -94,10 +94,12 @@ void setupInit() {
     ofSetFrameRate(FRAME_RATE);
     myFontNumber.load(FONT_P_FILE, NUMBER_HEIGHT);
     myFontLabel.load(FONT_P_FILE, LABEL_HEIGHT);
+    myFontPosition.load(FONT_P_FILE, POSITION_HEIGHT);
     myFontLap.load(FONT_P_FILE, LAP_HEIGHT);
     myFontLapHist.load(FONT_P_FILE, LAPHIST_HEIGHT);
     myFontNumberSub.load(FONT_P_FILE, NUMBER_HEIGHT / 2);
     myFontLabelSub.load(FONT_P_FILE, LABEL_HEIGHT / 2);
+    myFontPositionSub.load(FONT_P_FILE, POSITION_HEIGHT / 2);
     myFontLapSub.load(FONT_P_FILE, LAP_HEIGHT / 2);
     myFontInfo1m.load(FONT_M_FILE, INFO_HEIGHT);
     myFontInfo1p.load(FONT_P_FILE, INFO_HEIGHT);
@@ -679,13 +681,14 @@ void drawCameraPilot(int camidx, bool isSub) {
     // label
     ofxTrueTypeFontUC *font = isSub ? &myFontLabelSub : &myFontLabel;
     if (camView[i].labelString != "") {
-        drawStringWithShadow(font, myColorYellow,
+        drawStringWithShadow(font, myColorWhite,
                              camView[i].labelString, camView[i].labelPosX, camView[i].labelPosY);
     }
     // position
     if (camView[i].moveSteps > 0 || camView[i].racePosition == 0) {
         return;
     }
+    font = isSub ? &myFontPositionSub : &myFontPosition;
     string str = "";
     int pos = camView[i].racePosition;
     int x;
@@ -705,7 +708,7 @@ void drawCameraPilot(int camidx, bool isSub) {
     }
     x = min(ofGetWidth(), camView[i].posX + camView[i].width) - (1 + font->stringWidth(str));
     x = x - (isSub ? 10 : 20);
-    drawStringWithShadow(font, myColorWhite, str, x, camView[i].labelPosY);
+    drawStringWithShadow(font, myColorWhite, str, x, camView[i].labelPosY + POSITION_SHIFT);
 }
 
 //--------------------------------------------------------------
@@ -898,6 +901,9 @@ void drawInfo() {
 void drawStringWithShadow(ofxTrueTypeFontUC *font, ofColor color, string str, int x, int y) {
     ofSetColor(0);
     font->drawString(str, x + 1, y + 1);
+    font->drawString(str, x - 1, y + 1);
+    font->drawString(str, x + 1, y - 1);
+    font->drawString(str, x - 1, y - 1);
     ofSetColor(color);
     font->drawString(str, x, y);
 }
