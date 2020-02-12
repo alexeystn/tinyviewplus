@@ -1943,6 +1943,9 @@ void recvOsc() {
                 recvOscSpeech("jp", oscm.getArgAsString(0));
             }
         }
+        else if (addr.find("/v1/race") == 0) {
+            
+        }
     }
 }
 
@@ -2071,7 +2074,7 @@ void speakLap(int camid, float sec, int num) {
     if (speechLangJpn == true) {
         sout = regex_replace(sout, regex("(Pilot)(\\d)"), "パイロット $2");
     } else {
-        sout = regex_replace(sout, regex("(Pilot)(\\d)"), "$1 $2");
+        sout = regex_replace(sout, regex("(Пилот)(\\d)"), "$1 $2");
     }
     if (useStartGate == true && num == 1) {
         if (speechLangJpn == true) {
@@ -2084,7 +2087,7 @@ void speakLap(int camid, float sec, int num) {
     }
     ssec = getLapStr(sec);
     if (num > 0) {
-        sout += (speechLangJpn == true) ? "ラップ" : "lap";
+        sout += (speechLangJpn == true) ? "ラップ" : "круг ";
         sout += " " + ofToString(num - (useStartGate == true ? 1 : 0)) + ", ";
     }
 //    if (speechLangJpn == true) {
@@ -2172,7 +2175,7 @@ void speakAny(string lang, string text) {
     if (pid == 0) {
         // child process
         if (lang == "en") {
-            execlp("say", "", "-r", "240", "-v", "Victoria", text.c_str(), NULL);
+            execlp("say", "", "-r", "240", "-v", "Milena", text.c_str(), NULL);
         }
         else if (lang == "jp") {
             execlp("say", "", "-r", "240", "-v", "Kyoko", text.c_str(), NULL);
