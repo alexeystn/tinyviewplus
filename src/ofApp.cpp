@@ -40,6 +40,7 @@ bool speechLangJpn;
 // AR lap timer
 ofSoundPlayer beepSound, beep3Sound, notifySound, cancelSound;
 ofSoundPlayer countSound, finishSound;
+ofSoundPlayer rem2minSound, rem1minSound, rem30secSound, rem10secSound;
 ofFile resultsFile;
 int arLapMode;
 bool raceStarted;
@@ -145,6 +146,10 @@ void setupInit() {
     finishSound.load(SND_FINISH_FILE);
     notifySound.load(SND_NOTIFY_FILE);
     cancelSound.load(SND_CANCEL_FILE);
+    rem2minSound.load(SND_REM2MIN_FILE);
+    rem1minSound.load(SND_REM1MIN_FILE);
+    rem30secSound.load(SND_REM30SEC_FILE);
+    rem10secSound.load(SND_REM10SEC_FILE);
     raceStarted = false;
     elapsedTime = 0;
     raceResultTimer = -1;
@@ -2113,6 +2118,8 @@ void setNextSpeechRemainSecs(int curr) {
         }
     } else if (curr > 30) {
         next = 30;
+    } else if (curr > 10) {
+      next = 10;
     } else if (curr > 0) {
         next = 0;
     } else {
@@ -2134,36 +2141,53 @@ void speakRemainTime(int sec) {
         toggleRace();
         return;
     } else {
-        if (jp == true) {
-            str += "残り";
+        switch (sec) {
+            case 120:
+                rem2minSound.play();
+                break;
+            case 60:
+                rem1minSound.play();
+                break;
+            case 30:
+                rem30secSound.play();
+                break;
+            case 10:
+                rem10secSound.play();
+                break;
+            default:
+                break;
         }
-        if (sec >= 60 && sec % 60 == 0) {
-            // minute
-            int min = sec / 60;
-            str += ofToString(min);
-            if (jp == true) {
-                str += "分";
-            } else {
-                str += " minute";
-                if (min != 1) {
-                    str += "s";
-                }
-            }
-        } else {
-            // second
-            str += ofToString(sec);
-            if (jp == true) {
-                str += "秒";
-            } else {
-                str += " second";
-                if (sec != 1) {
-                    str += "s";
-                }
-            }
-        }
-        if (jp == false) {
-            str += " to go";
-        }
+        
+//        if (jp == true) {
+//            str += "残り";
+//        }
+//        if (sec >= 60 && sec % 60 == 0) {
+//            // minute
+//            int min = sec / 60;
+//            str += ofToString(min);
+//            if (jp == true) {
+//                str += "分";
+//            } else {
+//                str += " minute";
+//                if (min != 1) {
+//                    str += "s";
+//                }
+//            }
+//        } else {
+//            // second
+//            str += ofToString(sec);
+//            if (jp == true) {
+//                str += "秒";
+//            } else {
+//                str += " second";
+//                if (sec != 1) {
+//                    str += "s";
+//                }
+//            }
+//        }
+//        if (jp == false) {
+//            str += " to go";
+//        }
     }
     // speakAny(jp == true ? "jp" : "en", str);
 }

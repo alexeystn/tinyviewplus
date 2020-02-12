@@ -112,6 +112,10 @@
 #define SND_FINISH_FILE "system/finish.wav"
 #define SND_NOTIFY_FILE "system/notify.wav"
 #define SND_CANCEL_FILE "system/cancel.wav"
+#define SND_REM2MIN_FILE "system/rem2min.wav"
+#define SND_REM1MIN_FILE "system/rem1min.wav"
+#define SND_REM30SEC_FILE "system/rem30sec.wav"
+#define SND_REM10SEC_FILE "system/rem10sec.wav"
 // AR lap timer
 #define ARAP_MODE_NORM  0
 #define ARAP_MODE_LOOSE 1
