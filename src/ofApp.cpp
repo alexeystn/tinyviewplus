@@ -2518,7 +2518,7 @@ void fwriteRaceResult() {
     updateRacePositions();
     // - head
     strsumm += "- Summary -" + newline;
-    strsumm += "Name" + sep  + "Position" + sep + "Laps" + sep + "BestLap" + sep + "TotalTime" + newline;
+    strsumm += sep + "Name" + sep  + "Position" + sep + "Laps" + sep + "BestLap" + sep + "TotalTime" + newline;
     // - body
     for (int i = 0; i < cameraNum; i++) {
         string pilot = (camView[i].labelString == "") ? ("Pilot" + ofToString(i + 1)) : camView[i].labelString;
@@ -2533,7 +2533,7 @@ void fwriteRaceResult() {
         } else {
             total = camView[i].prevElapsedSec - WATCH_COUNT_SEC;
         }
-        strsumm += pilot + sep; // Name
+        strsumm += "> " + pilot + sep; // Name
         strsumm += ((pos == 0) ? "-" : ofToString(pos)) + sep; // Position
         strsumm += ((lps < 0) ? "-" : ofToString(lps)) + sep; // Laps
         strsumm += ((blap == 0) ? "-.-" : getLapStr(blap)) + sep; // BestLap
