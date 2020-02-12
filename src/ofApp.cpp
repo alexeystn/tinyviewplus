@@ -1948,8 +1948,11 @@ void recvOsc() {
                 recvOscSpeech("jp", oscm.getArgAsString(0));
             }
         }
-        else if (addr.find("/v1/race") == 0) {
-            
+        else if (addr == "/v1/race") {
+            if (oscm.getArgAsString(0) == "on")
+                startRace();
+            else if (oscm.getArgAsString(0) == "off")
+                stopRace(false);
         }
     }
 }
